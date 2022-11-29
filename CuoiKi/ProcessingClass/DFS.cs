@@ -73,14 +73,16 @@ namespace CuoiKi
                 visited[i] = false;
             }
 
-            visited[startVertex] =true;
-            stack.Push(startVertex);
+            visited[startVertex] =true; // Đánh dấu đỉnh đã được duyệt
+            stack.Push(startVertex); 
             result.Add(startVertex);
 
             while (stack.Any())
             {
-                int currVertex = stack.Peek();
+                int currVertex = stack.Peek(); //Lấy đỉnh hiện tại
                 List<int> vList = new List<int>();
+
+                // Tìm một đỉnh chưa duyệt liên thông với đỉnh hiện tại
                 for (int i = 0; i < matrix._vertices; i++)
                 {
                     if (matrix._matrix[currVertex][i] == 1 && visited[i] == false)
@@ -89,15 +91,16 @@ namespace CuoiKi
                         break;
                     }
                 }
-                if (vList.Count == 0)
+
+                if (vList.Count == 0) //Nếu không còn đỉnh nào để tiếp tục
                 {
-                    stack.Pop();
+                    stack.Pop(); //Loại đỉnh ra khỏi stack
                 }
                 else
                 {
-                    stack.Push(vList[0]);
-                    visited[vList[0]] = true;
-                    result.Add(vList[0]);
+                    stack.Push(vList[0]); // Thêm đỉnh vào stack
+                    visited[vList[0]] = true; // Đánh dấu đỉnh đã duyệt
+                    result.Add(vList[0]); // Thêm đỉnh vào kết quả
                 }
             }
         }
